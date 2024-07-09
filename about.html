@@ -65,6 +65,31 @@
             width: 100%;
             background-color:
        }
+        .tooltip:hover {
+            color: #f00;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: darkgrey;
+            color: black;
+            display:flex;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            left: 50%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
        .head img{
              max-height: 100%;
             max-width: 100%;
@@ -123,7 +148,7 @@
             <a href="about.html" style="color: black;">About Us</a>
             <a href="shop.html" ">Shop+</a>
             <a href="index.html#brands-section">Brands</a>
-            <a href="service.html">Services</a>
+        <a href="#" class="tooltip">Services<span class="tooltiptext">Virtual assistant</span></a>
         </div>
         <div class="search-container">
             <button type="button"><i class="fas fa-user"></i></button>
