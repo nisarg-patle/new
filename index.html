@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CycleCity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    <style>
+        body {
+            background-color: white;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: grey;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+        }
+         .navbar .menu {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .menu a {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 6px;
+            margin-left: 25px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+                   --s: 0.1em;   /* the thickness of the line */
+          --c: #1095c1; /* the color */
+
+          color: #0000;
+          padding-bottom: var(--s);
+          background:
+            linear-gradient(90deg,var(--c) 50%,#000 0) calc(100% - var(--_p,0%))/200% 100%,
+            linear-gradient(var(--c) 0 0) 0% 100%/var(--_p,0%) var(--s) no-repeat;
+          -webkit-background-clip: text,padding-box;
+                  background-clip: text,padding-box;
+          transition: 0.5s;
+}
+
+        .search-container {
+        margin-right:15px;
+            display: flex;
+            align-items: center;
+        }
+       .tooltip {
+            position: relative;
+            display: inline-block;
+            color: #333;
+            text-decoration: none;
+            padding: 10px 15px;
+            transition: color 0.3s;
+        }
+
+        .tooltip:hover {
+            color: #f00;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: darkgrey;
+            color: black;
+            display:flex;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            left: 50%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+
+        .main-image {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .main-image img {
+            margin-top:50px;
+            width: 100%;
+            height: 600px;;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .main-image .overlay {
+            position: absolute;
+            top: 20%;
+            left: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            color: #fff;
+        }
+
+        .main-image .overlay h2 {
+            color: red;
+            margin-bottom: 10px;
+        }
+
+        .main-image .overlay p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .main-image .overlay .explore-btn{
+            background-color:blue;
+            padding:6px;
+            font-family:Verdana;
+            font-size:17px;
+            color:white;
+            border:2px soid black;
+            border-radius:6px;
+            cursor:pointer;
+
+        }
+
+
+        .sale {
+
+            text-align: center;
+            padding: 40px 0;
+            background-color:;
+        }
+        .sell {
+            display: flex;
+            margin: 6px;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            border-radius: 55px;
+            padding: 20px; /* Added padding for better spacing */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
+        }
+
+        .sell-discover {
+            color: blue;
+            margin: 1px 0 10px 25px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 30px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .sell-best-seller {
+            color: black;
+            margin: 1px 20px 8px 20px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 50px;
+            font-weight: 1000;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            line-height: 0.5;
+        }
+
+
+
+        .sale .item-container {
+
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .sale .item {
+
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            text-align: center;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sale .item .logo {
+            cursor:pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .sale .item .logo img {
+
+            height: 50px;
+            width: 50px;
+        }
+        .sale .item img {
+        background-color:silver;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            opacity: 0.9;
+        }
+        .sale .item p {
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .sale .item .price, .sale .item hr, .sale .item p {
+            width: 100%;
+            text-align: center;
+        }
+        .sale .item .details {
+            font-size: 11px;
+            text-align: left;
+            width: 100%;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn i {
+            font-size: 18px;
+        }
+        .section {
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            width:100%;
+        }
+         .explore-brands {
+             display:inline-block;
+             padding:20px;
+             font-size:24px;
+             font-weight:bold;
+             border-left-radius:5px;
+             border-radius:50px;
+
+             border-bottom: 1px solid #bdc3c7;
+             background-color: #e74c3c;
+
+             text-align:center;
+             margin:20px;
+
+
+        }
+        .explore-brands:hover{
+            --c: #1095c1; /* the color */
+
+              color: #0000;
+              background:
+                linear-gradient(90deg,#fff 50%,var(--c) 0) calc(100% - var(--_p,0%))/200% 100%,
+                linear-gradient(var(--c) 0 0) 0% 100%/var(--_p,0%) 100% no-repeat;
+              -webkit-background-clip: text,padding-box;
+                      background-clip: text,padding-box;
+              transition: 0.5s;
+            }
+            .hover:hover {
+              --_p: 100%
+            }
+}
+
+        .cycle {
+            padding: 20px;
+            border-radius: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+            max-width: 100%;
+            background-image: url("bg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .hero {
+            display: inline-block;
+            text-align: center;
+            margin: 60px;
+            padding: 10px;
+        }
+        .hero img {
+            height: 180px;
+            width: 160px;
+            cursor: pointer;
+        }
+        .hero p {
+            font-size: 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            background-color: #343A40;
+            padding: 4px 5px;
+            color: white;
+            font-weight: bold;
+
+      }
+      a{
+        text-decoration:none;
+       }
+      .footer .logo img{
+        height:100px;
+        width:100px;
+        cursor:pointer;
+        left: 10px;
+        opacity: 0.1;
+        }
+        .foot {
+            display: flex;
+
+            height: 60vh;
+            background-color: black;
+            border-top: 1px solid black;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            color:lightblue;
+            font-weight:1000;
+
+        }
+        .foot ul {
+            margin-left:80px;
+            margin-top:40px;
+            display:flex;
+            flex-direction:column;
+            justify-content:auto;
+             list-style: none;
+            padding: 0;
+        }
+        .foot li {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+        .email {
+            display: flex;
+
+            font-size: 25px;
+            color: red;
+        }
+        .email i {
+            margin-top:2px;
+            margin-right: 7px;
+        }
+        .icon {
+
+            margin-top:40px;
+            display: flex;
+        }
+
+        .icon i {
+            font-color:white;
+            cursor:pointer;
+            font-size:25px;
+            margin-right: 20px;
+        }
+
+        .footer-content{
+            display:flex;
+            justify-content:space-around;
+            text-align-center;
+            flex-wrap: wrap;
+            padding-top:20px;
+        }
+
+        .footer input[type="email"] {
+            padding: 5px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            text-align: left;
+            background-color:black;
+            border-bottom: 1px solid #333;
+            width: 250px;
+            max-width: 100%;
+}
+            .footer button {
+                padding: 13px;
+                margin-top:15px;
+                border: none;
+                border-radius: 25px;
+                background-color: #007bff;
+                font-weight:bold;
+                font-size:20px;
+                color: #fff;
+                cursor: pointer;
+                width: 150px;
+                max-width: 100%;
+            }
+
+            .footer button:hover {
+                background-color: #0056b3;
+}
+         .footer .updates form{
+            display:flex;
+            flex-direction:column;
+            }
+         .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .updates {
+            position: relative;
+            width: 300px;
+            padding-right: 30px;
+            padding-left: 50px;
+            padding-top: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+        .footer-bottom {
+            text-align:center;
+            padding:10px;
+            padding: 10px 0;
+            background-color:black;
+            color:lightblue;
+            border-top: 1px solid #333;
+        }
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px;
+    }
+    .navbar .menu {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .navbar .menu a {
+        margin: 5px 0;
+        font-size: 16px;
+        margin-left: 0;
+    }
+    .main-image .overlay {
+        top: 10%;
+    }
+    .sale .item {
+        width: 100%;
+    }
+
+
+@media (max-width: 576px) {
+    .navbar {
+        padding: 8px;
+    }
+    .navbar .menu a {
+        font-size: 14px;
+    }
+    .main-image .overlay {
+        top: 5%;
+    }
+    .sale .item {
+        width: 100%;
+        padding: 10px;
+    }
+    .footer {
+        height: auto;
+        padding-bottom: 20px;
+    }
+    .foot {
+        flex-direction: column;
+        height: auto;
+    }
+    .foot ul {
+        margin-left: 0;
+        text-align: center;
+    }
+    .footer button {
+        width: 100%;
+    }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="menu">
+            <a href="#">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="shop.html">Shop+</a>
+            <a href="#brands-section">Brands</a>
+        <a href="#" class="tooltip">Services<span class="tooltiptext">Virtual assistant</span></a>
+        </div>
+        <div class="search-container">
+                <button type="button" style="background-color:grey; border:none; cursor: pointer;"> <i class="fa fa-user" style="padding:10px;"></i></button>
+                <button type="button" style="background-color:grey; border:none; cursor: pointer;"><i class="fa fa-search"></i></button>
+              <button type="button" style="background-color:grey; border:none; cursor: pointer;"> <i class="fas fa-heart" style="padding:10px;"></i></button>
+                <button type="button" style="background-color:grey; border:none; cursor: pointer;"><i class="fas fa-shopping-cart"></i></button>
+
+        </div>
+    </div>
+    <div class="main-image">
+        <img src="home.jpg" alt="cycle">
+        <div class="overlay">
+            <h2 style=" color:red; font-family:Papyrus;">WELCOME  TO  BYCYCLE  MANIA</h2>
+            <p>Your one-stop shop for the best bicycles</p>
+            <button type="button" class="explore-btn"  >Explore More</button>
+        </div>
+    </div>
+
+
+    <div class="sale">
+
+        <div class="sell">
+            <p class="sell-discover">DISCOVER</p>
+            <h2 class="sell-best-seller">BEST SELLER</h2>
+        </div>
+
+
+
+        <div class="item-container" style="margin-top: 20px;">
+            <div class="item">
+                <div class="logo">
+                    <img src="logo.jpg" alt="Logo">
+                </div>
+                <img src="shop.jpg" alt="On sale" style="height:210px;" class="image1">
+                <p class="price">Price: ₹ 9,999</p>
+                <hr>
+                <p style="color:yellow;">YELLOW HERCULES</p>
+                <p class="details">- All price include taxes<br><br>- HERCULES<br><br> - Ready to fly on the roads<br><br>- Take on Mountains and off-roads </p>
+                <div class="btn-container">
+                    <button class="btn" type="button">
+                        <i class="fas fa-shopping-cart"></i> Add to cart
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="item">
+                <div class="logo">
+                    <img src="logo.jpg" alt="Logo">
+                </div>
+                <img src="silver.jpg" alt="On sale" class="image2">
+                <p class="price">Price: ₹ 15,000</p>
+                <hr>
+                <p style="color:silver;">SILVER METAL</p>
+                <p class="details">- All price include taxes<br><br>- ROADMASTER<br><br> - Ride in Comfort, Ride with Confidence <br><br>- Highly Recommended by Riders Everywhere!</p>
+                <div class="btn-container">
+                    <button class="btn" type="button">
+                        <i class="fas fa-shopping-cart"></i> Add to cart
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="item">
+                <div class="logo">
+                    <img src="logo.jpg" alt="Logo">
+                </div>
+                <img src="blue.jpg" alt="On sale" style="height:210px; width:300px;" class="image3">
+                <p class="price">Price: ₹ 10,000</p>
+                <hr>
+                <p style="color:blue;">BLUE WOLF</p>
+                <p class="details">- All price include taxes<br><br>- HERO SPRINT<br><br> - Top Choice for Cycling Enthusiasts!<br><br>- Highly Recommended by Riders Everywhere!</p>
+                <div class="btn-container">
+                    <button class="btn" type="button">
+                        <i class="fas fa-shopping-cart"></i> Add to cart
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="offer">
+        <h1 style="font-size:40px; text-align:center; padding:10px;"> EXCLUSIVE OFFER %</h1>
+    </div>
+
+    <div class="discount" style="height=50px; width=100px;">
+        <img src="bank.jpg" alt="bank" style="padding:10px; ">
+        <img src="bajaj.jpg" alt="bank"style="padding:10px; ">
+        <img src="UPI.jpg" alt="bank"style="padding:10px; ">
+    </div>
+
+    <h4 style="background-color:black; color:black;"> #+</h4>
+
+<div id="brands-section" class="section">
+    <h4 class="explore-brands">Explore Brands</h4>
+</div>
+
+    <div class="cycle" >
+        <div class="hero">
+         <a href="https://www.herocycles.com/ " target="_blank">
+            <img src="hero.jpg" alt="hero" >
+            <p style=" margin: 10px 0 0 0;"> <b>HERO CYCLES</b></p>
+             </a>
+        </div>
+        <div class="hero">
+            <a href="https://www.trackandtrail.in/cycles/hercules-roadeo-geared " target="_blank">
+            <img src="roadeo.jpg" alt="hero" >
+            <p style=" margin: 10px 0 0 0;"> <b>ROADEO</b></p>
+                </a>
+        </div>
+
+        <div class="hero">
+            <a href="https://hercules.in/ " target="_blank">
+            <img src="hercules.jpg" alt="hero" width="200px;" >
+            <p style=" margin: 10px 0 0 0;"> <b>HERCULES</b></p>
+                </a>
+        </div>
+
+    <div class="hero">
+            <a href="https://www.firefoxbikes.com/" target="_blank">
+            <img src="fox.jpg" alt="hero" width="200px;" >
+            <p style=" margin: 10px 0 0 0;"> <b>FIRE-FOX</b></p>
+                </a>
+        </div>
+            <div class="hero">
+                <a href="https://www.roadmaster.com" target="_blank">
+            <img src="images.jpg" alt="hero" width="200px; " >
+            <p style=" margin: 10px 0 0 0;"> <b>ROADMASTER</b></p>
+                    </a>
+        </div>
+    <div class="hero">
+            <a href="https://www.machcity.com " target="_blank">
+            <img src="mach.jpg" alt="hero" width="200px;" >
+            <p style=" margin: 10px 0 0 0;"> <b>MACH-CITY</b></p>
+            </a>
+        </div>
+        <div class="hero">
+            <a href="https://montra.in/ " target="_blank">
+            <img src="montra.jpg" alt="hero" width="200px;" >
+            <p style=" margin: 10px 0 0 0;"> <b>MONTRA</b></p>
+            </a>
+        </div>
+        <div class="hero">
+            <a href=https://avoncycles.com/" target="_blank">
+            <img src="atlas.jpg" alt="hero" width="200px;" >
+            <p style=" margin: 10px 0 0 0;"> <b>ATLAS-CYCLES</b> </p>
+
+            </a>
+        </div>
+        </div>
+</div>
+
+<div class="footer">
+    <div class="foot">
+        <div class="footer-content">
+        <div class="updates">
+            <h3>Receive updates from Montra</h3>
+            <p>Join our mailing list to get the latest on arrivals, promotions.</p>
+            <form action="/subscribe" method="POST">
+                <input type="email" name="email" placeholder="Your mail ID" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+</div>
+        <ul>
+            <h1> information</h1>
+            <li>- contact us </li>
+            <li>- About us </li>
+            <li> </li>
+        </ul>
+        <ul>
+            <h1> Quick-Links</h1>
+            <li>- Events </li>
+            <li>- Franchise </li>
+            <li>- Our Group </li>
+        </ul>
+        <ul>
+            <div class="toll-free-inline" style="padding-top:px; font-size:10px;">
+                <h3 style="font-size:25px; color:red;">Toll Free <a href="tel:18001022324">18001022324</a></h3>
+
+            </div>
+               <p style="padding-top:20px; "> 10 a.m. to 5 p.m.<br> Monday-Friday</p>
+    <div class="icon">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-youtube"></i>
+</div>
+
+    </div>
+    <div class="footer-bottom">
+        <p style="margin-left:20px;">&copy; Copyright 2024. | All Rights Reserved | <a href="#">Privacy Policy</a> | All Specifications Are Subject To Change Without Notice.</p>
+    </div>
+
+
+
+
+</div>
+</body>
+</html>
