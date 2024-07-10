@@ -477,40 +477,7 @@
     }
 }
 
-@media (max-width: 576px) {
-    .main-image {
-        max-height: 200px; /* Adjust this value as needed */
-    }
 
-    .main-image .overlay {
-        top: 30%;
-    }
-}
-        .search-container {
-    width: 100%;
-    max-width: 600px; /* Adjust this value as needed */
-    margin: 0 auto;
-    padding: 10px;
-    box-sizing: border-box;
-}
-
-.search-container input[type="text"], .search-container button {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    box-sizing: border-box;
-}
-
-@media (min-width: 576px) {
-    .search-container input[type="text"], .search-container button {
-        width: calc(100% - 120px);
-        display: inline-block;
-    }
-
-    .search-container button {
-        width: 100px;
-    }
-}
 @media (max-width: 576px) {
     .navbar {
         padding: 8px;
@@ -540,6 +507,85 @@
     .footer button {
         width: 100%;
     }
+        @media (max-width: 576px) {
+    .main-image {
+        max-height: 200px; /* Adjust this value as needed */
+    }
+
+    .main-image .overlay {
+        top: 30%;
+    }
+}
+ .search-container {
+    width: 100%;
+    max-width: 600px; /* Adjust this value as needed */
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.search-container input[type="text"], .search-container button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+@media (min-width: 576px) {
+    .search-container input[type="text"], .search-container button {
+        width: calc(100% - 120px);
+        display: inline-block;
+    }
+
+    .search-container button {
+        width: 100px;
+    }
+}@media (max-width: 768px) {
+    .sell {
+        border-radius: 30px;
+        padding: 15px;
+    }
+
+    .sell-discover {
+        font-size: 1.2em;
+    }
+
+    .sell-best-seller {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 576px) {
+    .sell {
+        border-radius: 20px;
+        padding: 10px;
+    }
+
+    .sell-discover {
+        font-size: 1em;
+    }
+
+    .sell-best-seller {
+        font-size: 1.2em;
+    }
+}
+
+
+.sale {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #f9f9f9; /* Optional: Add a background color */
+}
+
+.sell-discover {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.sell-best-seller {
+    font-size: 2em;
+    margin: 0;
+}
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
